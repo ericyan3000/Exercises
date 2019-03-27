@@ -15,7 +15,9 @@ end
 =end
 
 def sum(integer)
-  integer.to_s.chars.map(&:to_i).reduce(&:+)
+  digits = integer.to_s.chars.map {|x|x.to_i}
+  total = digits.reduce(0) {|sum,x| sum += x}
+  #integer.to_s.chars.map(&:to_i).reduce(&:+)
 end
 
 

@@ -1,5 +1,6 @@
 def count_occurrences(array)
 	counts = {}
+  array.map! {|x| x.downcase}
 	array.each do |x|
 		##
     #if counts.has_key?(x)
@@ -7,7 +8,8 @@ def count_occurrences(array)
     #else
     #  counts[x] = 1
     #end
-    counts[x] = array.count(x)
+    x = x.downcase
+    counts[x] = array.count(x) unless counts.has_key?(x)
 
   end
   counts.each do |key, value|
@@ -16,6 +18,6 @@ def count_occurrences(array)
 end
 
 
-vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck', 'motorcycle', 'motorcycle', 'car', 'truck']
+vehicles = ['Car', 'CAR', 'truck', 'car', 'SUV', 'truck', 'motorcycle', 'motorcycle', 'car', 'truck']
 
 count_occurrences(vehicles)

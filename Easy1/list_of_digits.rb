@@ -1,5 +1,14 @@
 def digit_list(number) 
-	number.to_s.chars.map(&:to_i)
+	#number.to_s.chars.map {|c| c.to_i}
+  list_digit = []
+  while number != 0
+    remainder = number % 10
+    number = number / 10
+    list_digit.unshift(remainder)
+  end
+    
+  p list_digit
+
 end
 
   
