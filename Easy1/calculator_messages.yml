@@ -1,0 +1,13 @@
+welcome: "Welcome to Calculator! Enter your name:"
+valid_name: "Make sure to enter a valid name."
+first_number: "Enter the first number:"
+invalid_number: "Hmm... that doesn't look like a valid number"
+second_number: "Enter the second number:"
+operator_msg: "Enter the operation to perform.
+    \n1)add
+    \n2)substract
+    \n3)multiply
+    \n4)divide"
+ask_continue: "Another calculator? Y to continue"
+good_bye: "Thanks for using this calculator"
+

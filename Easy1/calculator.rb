@@ -2,13 +2,23 @@
 # ask user for an operation to perform
 # perform the operation on the two numbers
 # output the result
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
 
 def prompt(message)
   puts("=> #{message}")
 end
 
 def valid_number?(num)
-  num != 0
+  integer?(num) || float?(num)
+end
+
+def integer?(num)
+  /^\d+$/.match(num)
+end
+
+def float?(num)
+  /\d/.match(num) && /^\d*\.?\d*$/.match(num)
 end
 
 def operation_to_message(op)
@@ -28,14 +38,14 @@ number1 = ''
 number2 = ''
 operator = ''
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt(MESSAGES['welcome'])
 
 name = ''
 loop do
   name = gets().chomp()
 
   if name.empty?()
-    prompt("Make sure to use a valid name.")
+    prompt(MESSAGES['valid_name'])
   else
     break
   end
@@ -45,37 +55,32 @@ prompt("Hi #{name}:")
 
 loop do
   loop do
-    prompt("Enter the first number:")
-    number1 = gets().chomp().to_i()
+    prompt(MESSAGES['first_number'])
+    number1 = gets().chomp()
 
     if valid_number?(number1)
       break
     else
-      prompt("Hmm... that doesn't look like a valid number")
+      prompt(MESSAGES['invalid_number'])
     end
   end
+  number1 = number1.to_i()
 
   loop do
-    prompt("Enter the second number:")
-    number2 = gets().chomp().to_i()
+    prompt(MESSAGES['second_number'])
+    number2 = gets().chomp()
 
     if valid_number?(number2)
       break
     else
-      prompt("Hmm... that doesn't look like a valid number")
+      prompt(MESSAGES['invalid_number'])
     end
   end
+  number2 = number2.to_i()
 
-  operator_msg = <<-MSG
-    Enter the operation to perform.
-    1)add
-    2)substract
-    3)multiply
-    4)divide"
-  MSG
 
   loop do
-    prompt(operator_msg)
+    prompt(MESSAGES['operator_msg'])
     operator = gets().chomp()
     %w(1 2 3 4).include?(operator) ? break : nil
   end
@@ -95,9 +100,9 @@ loop do
 
   prompt "The result is #{result}"
 
-  prompt("Another calculator? Y to continue")
+  prompt(MESSAGES['ask_continue'])
   answer = gets().chomp()
   break unless answer.downcase().start_with?('y')
 end
 
-prompt("Thanks for using this calculator")
+prompt(MESSAGES['good_bye'])
